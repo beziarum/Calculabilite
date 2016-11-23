@@ -6,7 +6,7 @@ all:	$(GRAPHS)
 
 
 
-$(GRAPHS): main.o graph/$(GRAPHS).o
+$(GRAPHS): %: graph/%.o main.o
 	gcc -g -Og main.o graph/$@.o -o $@
 
 clean:
