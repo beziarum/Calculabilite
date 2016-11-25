@@ -2,14 +2,16 @@
 
 GRAPHS=$(patsubst graph/%.c,%,$(wildcard graph/*.c))
 
-all:	$(GRAPHS)
+all:	$(GRAPHS) pars
 
-
+pars: pars.o
+	gcc -g -Og pars.o -o pars
 
 $(GRAPHS): %: graph/%.o gen.o
 	gcc -g -Og gen.o graph/$@.o -o $@
 
 clean:
-	rm *.o
-	rm graph/*.o
-	rm $(patsubst %.c,%,$(GRAPHS))
+	rm -f *.o
+	rm -f pars
+	rm -f graph/*.o
+	rm -f $(patsubst %.c,%,$(GRAPHS))
